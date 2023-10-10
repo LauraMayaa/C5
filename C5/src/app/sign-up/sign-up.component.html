@@ -1,1 +1,56 @@
 <h1>Formulaire d'inscription</h1>
+<!-- Ce formulaire aura les champs suivants : email, firstname, lastname, password
+Tu sais maintenant que, pour chaque formulaire, on doit créer un modèle (une classe User avec chaque champ présent dans le formulaire)
+Un bouton d'inscription de type "submit"
+L'affichage du user créé dans la console au moment du click sur le bouton sauvegarde. -->
+
+<form #myForm="ngForm" (ngSubmit)="onSubmit()">
+
+    <fieldset>
+        <label for="email-user">Email</label>
+        <input id="email-user" type="email" [(ngModel)]="user.email" name="email" required #email="ngModel">
+    </fieldset>
+
+    <div *ngIf="isSend && email.errors">
+        <span *ngIf="email.errors?.['required']">Le champ email est requis</span>
+
+    </div>
+
+
+    <fieldset>
+        <label for="firstname">Firstname</label>
+        <input id="firstname" type="text" [(ngModel)]="user.firstname" name="firstname" required #firstname="ngModel"
+            minlength="3" maxlength="15">
+    </fieldset>
+
+    <div *ngIf="isSend && firstname.errors">
+        <span *ngIf="firstname.errors?.['required']">Le prénom est requis</span>
+        <span *ngIf="firstname.errors?.['maxlength']">Le prénom ne doit pas dépasser 15 caractères.</span>
+        <span *ngIf="firstname.errors?.['minlength']">Le prénom doit comporter au moins 3 caractères.</span>
+    </div>
+
+
+    <fieldset>
+        <label for="lastname">Lastname</label>
+        <input id="lastname" type="text" [(ngModel)]="user.lastname" name="lastname" required #lastname="ngModel"
+            minlength="3" maxlength="15">
+    </fieldset>
+
+    <div *ngIf="isSend && lastname.errors">
+        <span *ngIf="lastname.errors?.['required']">Le nom est requis</span>
+        <span *ngIf="lastname.errors?.['maxlength']">Le nom ne doit pas dépasser 15 caractères.</span>
+        <span *ngIf="lastname.errors?.['minlength']">Le nom doit comporter au moins 3 caractères.</span>
+    </div>
+
+    <fieldset>
+        <label for="password">Password</label>
+        <input id="password" type="password" [(ngModel)]="user.password" name="password" required #password="ngModel">
+    </fieldset>
+
+    <div *ngIf="isSend && password.errors">
+        <span *ngIf="password.errors?.['required']">L'email est invalide</span>
+    </div>
+
+    <button type="submit">Save</button>
+
+</form>
